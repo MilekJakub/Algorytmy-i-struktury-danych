@@ -3,54 +3,40 @@ using System.Collections.Generic;
 
 namespace lab3
 {
-    public class SinusZadanie
-    {
-        private const int max = 360;
-        static public double[] sinTable = new double [max];
-        static SinusZadanie()
-        {
-            
-            //wypełnić sinTable dla degree od 0 do 359
-            for (int i = 0; i < max; i++)
-            {
-                sinTable[i] = Math.Sin(i * Math.PI / 180);
-            }
-        }
-        public static double Sin(int degree)
-        {
-            //zwróć sinTable od degree, ale dla dowolnych kątów
-            if (degree > 0)
-                return sinTable[degree % max];
-            else
-                return -sinTable[degree % max];
-        }
-    }
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(fibbonaci(42));
-            Console.WriteLine(SinusZadanie.Sin(0) == 0);
-            Console.WriteLine(SinusZadanie.Sin(90) == 1);
-            Console.WriteLine(SinusZadanie.Sin(180) == 0);
-            Console.WriteLine(SinusZadanie.Sin(-90) == -1);
-            Console.WriteLine(SinusZadanie.Sin(-180) == 0);
+            Console.WriteLine($"fib(50):{fib(50, new Dictionary<int, long>())}");
+            Console.WriteLine($"fibonnaci(50):{fibonnaci(50)}");
+
+
         }
-        static long fib(int n, long[] mem)
+        static long fib(int n, Dictionary<int, long> memo)
         {
-            if (n < 2)
+            if(memo.ContainsKey(n))
+                return memo[n];
+
+            if (n <= 2)
                 return 1;
-            if (mem[n - 1] == -1)
-                mem[n - 1] = fib(n - 1, mem);
-            if (mem[n - 2] == -1)
-                mem[n - 2] = fib(n - 2, mem);
-            return mem[n - 1] + mem[n - 2];
+
+            memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+            return memo[n];
         }
-        static long fibbonaci(int n)
+        //ZADANIE 1
+        static long fibonnaci(int n)
         {
-            long[] mem = new long[n];
-            Array.Fill<long>(mem, -1);
-            return fib(n, mem);
+            long result = 0, n1 = 1, n2 = 1;
+            for (int i = 1; i < n - 1; i++)
+            {
+                if(i <= 2)
+                    result = 1;
+
+                result = n1 + n2;
+                n1 = n2;
+                n2 = result;
+            }
+            return result;
         }
     }
 }
