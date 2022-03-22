@@ -8,6 +8,8 @@ namespace lab4
         {
             var tablicaStringow = new string[] { "Jak", "Kuba", "Bogu", "tak", "Bóg", "Kubie" };
             InsertionSort(tablicaStringow);
+            var tablicaIntow = new int[] { 5, 50, 10, 2, 81, 4, 19, 1 };
+            InsertionSort(tablicaIntow);
         }
         static void InsertionSort(string[] stringTab)
         {
@@ -23,8 +25,28 @@ namespace lab4
                     }
                 }
             }
-            Console.WriteLine("Sorted array:");
+            Console.WriteLine("Sorted string array:");
             foreach (var item in stringTab)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        static void InsertionSort(int[] intTab)
+        {
+            for (int i = 0; i < intTab.Length - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (intTab[j -1] > intTab[j])
+                    {
+                        int temp = intTab[j - 1];
+                        intTab[j - 1] = intTab[j];
+                        intTab[j] = temp;
+                    }
+                }
+            }
+            Console.WriteLine("Sorted int array:");
+            foreach (var item in intTab)
             {
                 Console.WriteLine(item);
             }
