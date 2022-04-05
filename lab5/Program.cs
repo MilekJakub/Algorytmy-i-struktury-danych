@@ -4,12 +4,10 @@ class App
 {
     public static void Main(string[] args)
     {
-        int[] arr = {1, 2, 3, 4};
-        MergeSortInPLace.Sort(arr);
-        foreach (var item in arr)
-        {
-            Console.Write(item + " ");
-        }
+        //Ćwiczenie 2
+        int[] arr = { 2, 4, 6, 3, 5, 8, 11, 7 };
+        MergeSortInPlace.Sort(arr);
+        Console.WriteLine(String.Join(',', arr));
     }
 }
 //Cwiczenie 1
@@ -68,7 +66,7 @@ public class StringMergeSort
 //Cwiczenie 2
 //Zaimplementuj metodę wykonującą scalanie w miejscu
 //4 punkty
-public class MergeSortInPLace
+public class MergeSortInPlace
 {
     public static void Sort(int[] arr)
     {
@@ -105,7 +103,16 @@ public class MergeSortInPLace
     //arr => {2, 3, 4, 5, 6, 8, 11, 7}
     private static void Merge(int[] arr, int left, int mid, int right)
     {
-        
+        if (mid == right)
+            return;
+
+        if(arr[mid] > arr[mid + 1])
+        {
+            var temp = arr[mid];
+            arr[mid] = arr[mid + 1];
+            arr[mid + 1] = temp;
+            mid++;
+        }
     }
 }
 //Cwiczenie 3
